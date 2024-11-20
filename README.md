@@ -1,1 +1,1 @@
-# zowgee-wow-classic-class-quiz
+# wow-classic-class-quiz
