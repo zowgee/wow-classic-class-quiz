@@ -1,8 +1,13 @@
 $(document).ready(function() {
     const questions = [
         {
-            question: "Is there a class that you DON'T want to play?",
+            question: "Are there classes that you DON'T want to play?",
             choices: ["Druid", "Hunter", "Mage", "Paladin", "Priest", "Rogue", "Shaman", "Warlock", "Warrior"],
+            type: "multiple"
+        },
+        {
+            question: "Are there races that you DON'T want to play?",
+            choices: ["Human", "Night Elf", "Dwarf", "Gnome", "Orc", "Undead", "Tauren", "Troll"],
             type: "multiple"
         },
         {
@@ -93,14 +98,93 @@ $(document).ready(function() {
             }).get() :
             $('input[name="choice"]:checked').val()
 
+        // class
         if (currentQuestion == 0){
             selectedValues.forEach((value, key) => {
                 c = questions[currentQuestion].choices[value]
                 scores[c] = scores[c] - 100
             });
         }
-        // heal
+        // race
+        let eligibleClasses = {
+            Druid: 2,
+            Hunter: 5,
+            Mage: 4,
+            Paladin: 2,
+            Priest: 5,
+            Rogue: 7,
+            Shaman: 3,
+            Warlock: 4,
+            Warrior: 8
+        }
         if (currentQuestion == 1){
+            selectedValues.forEach((value, key) => {
+                race = questions[currentQuestion].choices[value]
+                if (race == "Dwarf"){
+                    eligibleClasses.Hunter -= 1
+                    eligibleClasses.Paladin -= 1
+                    eligibleClasses.Priest -= 1
+                    eligibleClasses.Rogue -= 1
+                    eligibleClasses.Warrior -= 1
+                }
+                if (race == "Gnome"){
+                    eligibleClasses.Mage -= 1
+                    eligibleClasses.Rogue -= 1
+                    eligibleClasses.Warlock -= 1
+                    eligibleClasses.Warrior -= 1
+                }
+                if (race == "Human"){
+                    eligibleClasses.Mage -= 1
+                    eligibleClasses.Paladin -= 1
+                    eligibleClasses.Priest -= 1
+                    eligibleClasses.Rogue -= 1
+                    eligibleClasses.Warlock -= 1
+                    eligibleClasses.Warrior -= 1
+                }
+                if (race == "Night Elf"){
+                    eligibleClasses.Druid -= 1
+                    eligibleClasses.Hunter -= 1
+                    eligibleClasses.Priest -= 1
+                    eligibleClasses.Rogue -= 1
+                    eligibleClasses.Warrior -= 1
+                }
+                if (race == "Orc"){
+                    eligibleClasses.Hunter -= 1
+                    eligibleClasses.Rogue -= 1
+                    eligibleClasses.Shaman -= 1
+                    eligibleClasses.Warlock -= 1
+                    eligibleClasses.Warrior -= 1
+                }
+                if (race == "Tauren"){ 
+                    eligibleClasses.Druid -= 1
+                    eligibleClasses.Hunter -= 1
+                    eligibleClasses.Shaman -= 1
+                    eligibleClasses.Warrior -= 1
+                }
+                if (race == "Troll"){ 
+                    eligibleClasses.Hunter -= 1
+                    eligibleClasses.Mage -= 1
+                    eligibleClasses.Priest -= 1
+                    eligibleClasses.Rogue -= 1
+                    eligibleClasses.Shaman -= 1
+                    eligibleClasses.Warrior -= 1
+                }
+                if (race == "Undead"){ 
+                    eligibleClasses.Mage -= 1
+                    eligibleClasses.Priest -= 1
+                    eligibleClasses.Rogue -= 1
+                    eligibleClasses.Warlock -= 1
+                    eligibleClasses.Warrior -= 1
+                }
+            });
+            for (let className in eligibleClasses) {
+                if (eligibleClasses[className] <= 0) {
+                    scores[className] -= 100
+                }
+            }
+        }
+        // heal
+        if (currentQuestion == 2){
             if (selectedValues == 0){
                 scores.Druid += 1
                 scores.Hunter -= 100
@@ -120,7 +204,7 @@ $(document).ready(function() {
             }
         }
         // tank
-        if (currentQuestion == 2){
+        if (currentQuestion == 3){
             if (selectedValues == 0){
                 scores.Druid -= 100
                 scores.Hunter -= 100
@@ -139,7 +223,7 @@ $(document).ready(function() {
             }
         }
         // dps
-        if (currentQuestion == 3){
+        if (currentQuestion == 4){
             if (selectedValues == 0){
                 scores.Druid -= 100
                 scores.Hunter -= 100
@@ -156,7 +240,7 @@ $(document).ready(function() {
             }
         }
         // leveling
-        if (currentQuestion == 4){
+        if (currentQuestion == 5){
             if (selectedValues == 0){
                 scores.Druid += 1
                 scores.Hunter += 1
@@ -183,7 +267,7 @@ $(document).ready(function() {
             }
         }
         // pvp
-        if (currentQuestion == 5){
+        if (currentQuestion == 6){
             if (selectedValues == 0){
                 scores.Druid += 1
                 scores.Hunter += 1
