@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+#quiz-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    margin-bottom: 20px; /* Add space below the heading */
+}
+
+#question {
+    font-size: xx-large;
+    margin-bottom: 15px; /* Add space below the question */
+    line-height: 1.5; /* Increase line height for better readability */
+}
+
+#choices {
+    font-size: large;
+    margin-bottom: 20px; /* Add space below the choices */
+    line-height: 1.5; /* Increase line height for better readability */
+}
+
+button {
+    margin-top: 10px;
+}
+
+footer {
+    font-size: xx-large;
+    text-align: center;
+    margin-top: 20px; /* Space above the footer */
+    padding: 10px; /* Padding inside the footer */
+    background-color: #f8f8f8; /* Light background color */
+    border-top: 1px solid #ccc; /* Top border for separation */
+}
+
+footer p {
+    margin: 0; /* Remove default margin */
+}
+
+footer a {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+footer a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
